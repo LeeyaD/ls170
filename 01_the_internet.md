@@ -1,4 +1,4 @@
-# The Internet
+# What is the Internet?
 A network of networks that enable communication of various networked applications--the interaction of multiple different protocols (systems of rules).
 
 **Network**
@@ -14,3 +14,15 @@ Network devices that allow communication between networks by routing network tra
 comp - switch -- router --- router -- switch - comp
           |                             |
         comp                           comp
+
+
+# Protcols
+A system of rules that govern the exchange/transmission of data
+
+There are lots of different ones for various reasons, but the 2 main reasons are:
+1. To address *different* aspects of network communication (e.g. HTTP protocol for structuring messages and TCP is for transfering messages btwn apps)
+
+2. To address the *same* aspect of network communication but in different ways or for a special use-case (e.g. both TCP and UDP are protocols for transferring messages btwn apps but do it in different ways)
+
+# A Layered System
+
