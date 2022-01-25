@@ -50,7 +50,7 @@ LAYERS (there's overlap, so layers don't match up evenly)
 | Physical     |      "       |
 
 
-Data Encapsulation in network models is when data is being hid from one layer by encapsulating it in the data unit or PDU (**Protocol Data Unit**)of the layer below it.
+Data Encapsulation in network models is when data is being hid from one layer by encapsulating it in a data unit or PDU (**Protocol Data Unit**) of the layer below it.
 
 PDUs are blocks of data transferred over a network, and are made up of the following:
 1. A **header** (and sometimes a **footer/trailer**) that consists of protocol-specific metadata about the PDU.
@@ -87,7 +87,7 @@ There are 4 types of delay that constribute to the overall latency of a network 
 4. **Queuing delauy:** the time it takes data to queue/buffer. This occurs when there's more data than a network device can process at one time
 
 Other important(?) terms:
-**Last-mile latency:** when delays occur within parts of the network that are closest to the end pionts (e.g. getting the network signal from your ISP's network to your home/office).
+**Last-mile latency:** when delays occur within parts of the network that are closest to the end points (e.g. getting the network signal from your ISP's network to your home/office).
 **Round-Trip Time (RTT):** a latency calculation, it's the time for a signal to be send PLUS the time for an acknowledgment/response to be received.
 
 ##### Bandwidth
@@ -100,9 +100,9 @@ The car traveling 50mph on a 10 mile journey and the addition of other cars demo
 
 # The Data Link / Link Layer
 **What happens at this layer?**
-It's an interface between the workings of the physical network and the more logical layers above
+It's an interface between the workings of the physical network and the more logical layers above.
 
-**What kinds of protocols are at this layer?**
+**Primary function of protocols at this layer?**
 Ones mainly concerned with one of the most important rules for transferring data from one place to another--*identifying devices* on the physical network AND moving data over the physical betwork btwn. the devices that make it up; for example, hosts (e.g. computers), switches, routers.
 
 **What are the most common protocols at this layer?**
@@ -111,7 +111,7 @@ The Ethernet Protocol, it has 2 important aspects; framing and addressing.
 1. Ethernet Frames
 A PDU that encapsulates data from the *Internet/Network* layer. It's the lowest level where encapsulation occurs.
 
-Here logical structure is added to the binary data, defining which bits are the data payload and which are metadata to be used in the process of transporting the frame.
+Here logical structure is added to the binary data, defining which bits are the data payload and which are metadata to be used in the process of transporting the frame.**Data:** in bits with logical structure
 
 An Ethernet-compliant network device can identify the different parts of a frame by the different 'fields' of data (each has a specific length in bytes and appear in a set order).
 
@@ -137,3 +137,37 @@ A switch uses the destination address in order to direct a frame only to the int
 * Addresses are flat rather then hierarchical; the entire address is a single sequence of values and can't be broken down into sub-divisions
 
 
+# The Network / Internet Layer
+**Data:** in bits with logical structure
+**What happens at this layer?**
+Inter-network communication
+
+**Primary function of protocols at this layer?**
+Facilitating communication btwn. hosts (e.g. computers) on different networks.
+
+**What are the most common protocols at this layer?**
+Internet Protocol (IP); IPv4 & IPv6 are currently in use. Although there are differences 2 primary features that are the same are:
+
+1. Encapsulation of data into packets
+IP PDU's are called packets. The data payload here is the TCP segment or UDP datagram. The header made up of logic fields (i.e. there's a logical separation of the bits into fields determined by length of bits and order). These logic fields contain metadata used for transporting the packet.
+
+Important fields include
+
+**version:**
+**ID, Flags, Fragment Offset:**
+**TTL:**
+**Protocol:**
+**Checksum:**
+**Source address:**
+**Destination address:**
+
+2. Routing capability via IP addressing
+IP addresses are 32-bits in length and divided into 4 sections of 8 bits each that get converted from binary to decimal
+
+These addresses logical in that aren't tied to a single device but get assigned to devices when they join a network. The assigned addresses fall within a range of addresses available to the local network that the device it connected to.
+
+Defined by a network hierarchy, the overall network is split into a logical subnetwork with each subnetwork defined by the range of IP available to it.
+
+Routers don't need to keep a record of every device within an an addressable range but only a record of which router on a network controls access to the segment with that network address
+
+IPv6 uses 128-but addresses (divided into eight 16-bit blocks) and was created to expand the pool of addresses as IPv4 addresses will eventually be depleted. Aside from address structure, there's a difference in the structure of the header and there's no error checking. IPv6 leaves the error checking to the Link Layer Checksum
