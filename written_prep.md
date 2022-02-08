@@ -1,22 +1,14 @@
-# The Internet
-### Learn that IP enables communication between devices
-Make sure to form a clear mental model of what The Internet Protocol (IP) does as it's a key part of the functionality of the internet.
+Mental model of data moving through the layers and over the network: Like a present being wrapped up in order to be shipped and then unwrapped by the received.
 
-## Summary
-* Different types of protocol are concerned with different aspects of network communication. It can be useful to think of these different protocols as operating at particular 'layers' of the network.
+**Burning thoughts & Qs**
+1. Still a little fuzzy on how the Ethernet protocol moves data over the physical network. It's just the metadata in the header right? like MAC addressing piggy-backs off of the frames, right?
 
-* *Encapsulation* is a means by which protocols at different network layers can work together.
+2. In connection-oriented communication, when a new socket object is created that contains both the source and destinateion IP addresses & port #s, what happens to the first socket object that just contains the source IP & port #? Is it never used again or deleted? I think when it can no longer be referenced, it "dies"
 
-* Encapsulation is implemented through the use of *Protocol Data Units* (PDUs). The PDU of a protocol at one layer, becomes the data payload of the PDU of a protocol at a lower layer.
+3. LS defines a *network infrastructure* as "..devices, routers, switches, cables, etc." (Lesson 1: Summary), but I read somewhere the "physical network is comprised of devices that transmit electrical signals, light, and radio waves". Is it okay to include 'routers' & 'switches' in my definition of a network infrastructure AND in how I describe the *physical network*?
 
-* The *physical network* is the tangible infrastructure that transmits the electrical signals, light, and radio waves which carry network communications.
+4. Are network "hops" only between routers? Or can a hop be from a router to a switch or a switch to the actual host device?
 
-* *Ethernet* is a set of standards and protocols that enables *communication between devices on a local network*.
+----------------------------------------------------------------------------------------------------
 
-* Ethernet uses *MAC addressing* to identify devices connected to the local network.
 
-* The *Internet Protocol* (IP) is the predominant protocol used for *inter-network communication*.
-
-* There are two versions of IP currently in use: IPv4 and IPv6.
-
-* The *Internet Protocol* uses a system of addressing (IP Addressing) to *direct data between one device and another across networks*.

@@ -84,7 +84,7 @@ There are 4 types of delay that constribute to the overall latency of a network 
 1. **Propagation delay:** calculated as a ratio btwn. distance & speed, it's the time it takes for a message to go from sender to receiver
 2. **Transmission delay:** the time it takes to push data onto a link (i.e. the many diff. wires & cables interconnected by switches, routers, and other network devices).
 3. **Processing delay:** the time it takes data to be processed at every link (data doesn't directly cross from one line to another)
-4. **Queuing delauy:** the time it takes data to queue/buffer. This occurs when there's more data than a network device can process at one time
+4. **Queuing delay:** the time it takes data to queue/buffer. This occurs when there's more data than a network device can process at one time
 
 Other important(?) terms:
 **Last-mile latency:** when delays occur within parts of the network that are closest to the end points (e.g. getting the network signal from your ISP's network to your home/office).
@@ -138,7 +138,6 @@ A switch uses the destination address in order to direct a frame only to the int
 
 
 # The Network / Internet Layer
-**Data:** in bits with logical structure
 **What happens at this layer?**
 Inter-network communication
 
@@ -153,13 +152,13 @@ IP PDU's are called packets. The data payload here is the TCP segment or UDP dat
 
 Important fields include
 
-**version:**
-**ID, Flags, Fragment Offset:**
-**TTL:**
-**Protocol:**
-**Checksum:**
-**Source address:**
-**Destination address:**
+**Version:** The version of the internet protocol used (e.g. IPv4 or IPv6)
+**ID, Flags, Fragment Offset:** These fields are related to fragmentation. If the Transport layer PDU is too large to be sent as a single packet, it can be fragmented, sent as multiple packets, and then reassembled by the recipient.
+**TTL:** Every packet has a Time to Live (TTL) value. This is to ensure that any packets which don't reach their destination for some reason aren't left to endlessly bounce around the network. The TTL indicates the maximum number of network 'hops' a packet can take before being dropped. At each hop, the router which processes and forwards the packet will decrement the TTL value by one.
+**Protocol:** This indicates the protocol used for the Data Payload, e.g. TCP, UDP, etc.
+**Checksum:** This is an error checking value generated via an algorithm. The destination device generates a value using the same algorithm and if it doesn't match, it drops the packet. IP doesn't manage retransmission of dropped packets. This is left to the layers above to implement.
+**Source address:** The 32-bit IP address of the source (sender) of the packet
+**Destination address:** The 32-bit IP address of the destination (intended recipient) of the packet
 
 2. Routing capability via IP addressing
 IP addresses are 32-bits in length and divided into 4 sections of 8 bits each that get converted from binary to decimal
