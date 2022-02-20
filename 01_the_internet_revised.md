@@ -22,10 +22,7 @@ A network of networks. It enables the communication of various networked applica
 
 **Routers:** Network devices that can route data from one network to another network. Between each sub-network are systems of routers that direct the network traffic.
 
-
 **Protcols:** A system of rules that govern the exchange/transmission of data.
-Super important because it's how networked devices running on various makes & models of network devices (i.e. hubs, switches and routers) are able to communicate.
-
 There are lots of different protocols for 2 main reasons:
 1. Diff. protocols address *different* aspects of network communication (e.g. HTTP protocol is for structuring messages and TCP is for transferring messages btwn apps)
 
@@ -33,15 +30,12 @@ There are lots of different protocols for 2 main reasons:
 
 
 # A Layered System
-Breaking down the different parts of network communication into modules and structuring those modules in a layered system helps us better understand the protocols in each layer since they're grouped by the aspect they address.
+Breaking down network communication into modules and structuring those modules in a layered system helps us better understand the protocols in each layer since they're grouped by the aspect they address.
 
 2 popular models that demo this layered system concept are:
-
 1. The OSI Model (Open Systems Interconnection)
 Layers are based on the function each one provides (e.g., physical addressing, logical addressing & routing, encryption, compression, etc.)
-
 AND
-
 2. TCP/IP model (Transfer Control Protocol / Internet Protocol model aka 'IP Suit' or 'DoD model')
 Layers are based on the scope of communications within each layer (e.g., within a local network, btwn. networks, etc.)
 
@@ -66,14 +60,6 @@ PDUs are blocks of data transferred over a network, and are made up of the follo
 The separation of layers adds a level of abstraction. A lower layer isn't concerned with how a protocol at another layer is implemented. It only needs to encapsulate *some data* from the layer above and provide the result of this encapsulation to the layer below.
 
 
-# The Physical Network
-Real-word limitations & boundaries (e.g. how fast an electrical or light signal can travel or the distance a radio wave can reach) determine the physical characteristics of a network, which impact how protocols function.
-
-
-#### Bits & Signals
-Data at the physical layer is a stream of bits (binary data) w/o any logical structure.
-Bits gets converted into signals (electric, light, or radio waves) in order to be transported
-
 #### 2 main characteristics of a physical network
 ##### Latency
 The time it takes data to get from one point in a network to another point in a network. It's essentially a mesaure of delay, usually in milliseconds (ms).
@@ -84,15 +70,9 @@ There are 4 types of delay that constribute to the overall latency of a network 
 3. **Processing delay:** the time it takes data to be processed at every link (data doesn't directly cross from one line to another)
 4. **Queuing delay:** the time it takes data to queue/buffer. This occurs when there's more data than a network device can process at one time, the data awaiting processing gets but in a queue/buffer.
 
-Other important(?) terms:
-**Last-mile latency:** Delays that occur within parts of the network that are closest to the end points (e.g. from your ISP's network to your home).
-**Round-Trip Time (RTT):** A latency calculation of the time for a signal to be sent and the time for an acknowledgment/response to be received.
-
 ##### Bandwidth
 The amount of data that can be sent in a particular amount of time (usually a second).
 Increasing bandwidth doesn't necessarily mean a decrease in latency.
-
-**Bandwidth bottleneck:** The point where bandwidth changes from relatively high to relatively low.
 
 
 # The Data Link / Link Layer
@@ -106,31 +86,22 @@ Being able to identify devices and move data from one device to another on the p
 The Ethernet Protocol, it has 2 important aspects; framing and addressing.
 
 1. Ethernet Frames
-A PDU that encapsulates data from the *Internet/Network* layer. It's the lowest level where encapsulation occurs.
-
-Here logical structure is added to the binary data, defining which bits are the data payload and which are metadata to be used in the process of transporting the frame.**Data:** in bits with logical structure
-
-An Ethernet-compliant network device can identify the different parts of a frame by the different 'fields' of data (each has a specific length in bytes and appear in a set order).
+A PDU that encapsulates data from the *Internet/Network* layer.
 
 **Source & Destination MAC Address**, addresses of the device that created the frame and of the device the data is intended for.
 
 **Data Payload**, contains data for the entire PDU from the layer above (e.g. an IP Packet)
 
-The two fields above exist across all the different Ethernet standards but different Ethernet versions have slightly different structures.
-
 **Interframe Gap (IFG)**, specified by the Ethernet protocol and varying in length based on the capability of the Ethernet connection, it's the brief pause between the transmission of each frame, allowing the receiver to prepare to receive the next frame. It contributes to the **Transmission delay** element of latency.
 
+AND
+
 2. MAC Addresses (aka 'physical address', 'burned in address')
-A unique sequence of six 2-digit hexadecimal numbers assigned to a **network-enabled device** (e.g. a Network Interface Card-NIC- found in PCs & laptops) when it's manufactured.
-
-A hub sends the frame to every device on the network, the devices simply ignore the frame if the address don't match up.
-
-A switch uses the destination address in order to direct a frame only to the intended device thru the use of a MAC Address Table; a record of the MAC addresses of the devices connected to it and their associated Ethernet port (where the device is connected on the switch).
+A unique sequence of six 2-digit hexadecimal numbers assigned to a **network-enabled device** when it's manufactured.
 
 2 important characteristics make MAC Addresses unscalable though:
-
-* Addresses are physical not logical since each address is burned in/tied to a specific address
-* Addresses are flat rather then hierarchical; the entire address is a single sequence of values and can't be broken down into sub-divisions
+* Addresses are physical not logical and
+* Addresses are flat rather then hierarchical; they're a single sequence of values and can't be broken down into sub-divisions
 
 
 # The Network / Internet Layer
@@ -147,22 +118,14 @@ Internet Protocol (IP); IPv4 & IPv6 are currently in use. Although there are dif
 IP PDU's are called packets. The data payload here is the TCP segment or UDP datagram. The header made up of logic fields (i.e. there's a logical separation of the bits into fields determined by length of bits and order). These logic fields contain metadata used for transporting the packet.
 
 Important fields include
-
-**Version:** The version of the internet protocol used (e.g. IPv4 or IPv6)
-**ID, Flags, Fragment Offset:** These fields are related to fragmentation. If the Transport layer PDU is too large to be sent as a single packet, it can be fragmented, sent as multiple packets, and then reassembled by the recipient.
-**TTL:** Every packet has a Time to Live (TTL) value. This is to ensure that any packets which don't reach their destination for some reason aren't left to endlessly bounce around the network. The TTL indicates the maximum number of network 'hops' a packet can take before being dropped. At each hop, the router which processes and forwards the packet will decrement the TTL value by one.
-**Protocol:** This indicates the protocol used for the Data Payload, e.g. TCP, UDP, etc.
 **Checksum:** This is an error checking value generated via an algorithm. The destination device generates a value using the same algorithm and if it doesn't match, it drops the packet. IP doesn't manage retransmission of dropped packets. This is left to the layers above to implement.
 **Source address:** The 32-bit IP address of the source (sender) of the packet
 **Destination address:** The 32-bit IP address of the destination (intended recipient) of the packet
 
 2. Routing capability via IP addressing
-IP addresses are 32-bits in length and divided into 4 sections of 8 bits each that get converted from binary to decimal
+IP addresses are n-bits in length and divided into sections of bits that get converted from binary to decimal.
+These addresses get assigned to devices when they join a network and fall within a range of addresses available to the LAN that the device is connected to.
 
-These addresses logical in that aren't tied to a single device but get assigned to devices when they join a network. The assigned addresses fall within a range of addresses available to the local network that the device it connected to.
+The overall network is hierarchical and split into a logical subnetwork with each subnetwork defined by a range of IP addresses.
 
-Defined by a network hierarchy, the overall network is split into a logical subnetwork with each subnetwork defined by the range of IP available to it.
-
-Routers don't need to keep a record of every device within an an addressable range but only a record of which router on a network controls access to the segment with that network address
-
-IPv6 uses 128-but addresses (divided into eight 16-bit blocks) and was created to expand the pool of addresses as IPv4 addresses will eventually be depleted. Aside from address structure, there's a difference in the structure of the header and there's no error checking. IPv6 leaves the error checking to the Link Layer Checksum
+IPv6 uses more bits in its addresses and was created to expand the pool of addresses because IPv4 addresses will eventually be depleted. Compared to IPv4, IPv6 has a different structure to the address (mentioned above) and the header. There's also no error checking, IPv6 leaves that to the Link Layer Checksum.
