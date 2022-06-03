@@ -10,6 +10,7 @@ Protocols here structure messages, making sure they contain the appropriate data
 
 Applications interact most with the protocols at this layer but can interact directly with the Transport Layer (e.g. by opening a TCP socket). Less common for apps to interact with layers below transport.
 
+
 ### Application Layer Protocols
 Rules for how applications talk to each other at a syntactical level. Different apps have different requirements for how they communicate at a syntactical level.
 For example, an email client and an email server need SMTP and POP or IMAP because they interact differently, than a web browser for a web server, which needs HTTP.
@@ -25,11 +26,12 @@ The *World Wide Web* aka the web, is:
 Problem back in the 80s: 
 Info stored on different computers is hard to locate &access. Although part of the same LAN, each computer required the user to log in directly and use a specific program/command.
 
-The solution: create a uniform system used by all of the hosts on the network, where there's one way to:
-(HTML) - structure information that could be rendered for viewing
-(URIs) - address resources so they could be located with ease
-(HTTP) - request a particular resource, and
-(HTTP) - respond to a request for a specific resource
+The solution: 
+Create a uniform system used by all hosts on the network.
+- Structure information that can be rendered for viewing (HTML)
+- Address resources so they can be easily located (URIs)
+- Request a particular resource and (HTTP)
+- Respond to a request for a specific resource (HTTP)
 
 *Hypertext Markup Language* (HTML): structures resources
 *Uniform Resource Identifier* (URI): a string of characters that identify particular resources.
@@ -41,28 +43,19 @@ URL is a way to find resources on the web
 ## BOOK: Intro to HTTP
 ### Background
 #### Background
-A browser is an interface, it's how we interact with the web
-HTTP is an application protocol that sends a collection of files (CSS, HTML, Javascript, videos, images, etc) from a **server** to our browswer (the **client**)
-HTTP is a protocol that serves as a link between applications and the transfer of hypertext documents (documents of text interconnected by hyperlinks).
-HTTP model: a client makes a request to a server and waits for a response, which is why it's referred to as the **request response protocol**
+A browser is an interface, it's how we interact with the web.
 
-IP addresses are identifiers for devices and servers (end-to-end)
-Port numbers are identifiers for programs and processes
+HTTP is an application protocol that: 
+- Sends a collection of files (CSS, HTML, Javascript, videos, images, etc) from a **server** to our browswer (the **client**)
+- Serves as a link between applications and the transfer of hypertext documents (documents of text interconnected by hyperlinks).
 
 *DNS* is a distributed database that keeps track of doman names and their corresponding IP addresses on the internet. The address is what's used to make a request to the server.
 
-- DNS databases are stored on computers called DNS servers and no single server contains the complete db
-- If a DNS server doesn't contain a requested domain name, the request is routed to another DNS server up the hierarchy till it's found
-- When the browser issues a request, it's sending text to an IP address. Because the client (web browser) and the server (recipient of the request) have an agreement, or protocol, in the form of HTTP, the server can take apart the request, understand its components and send a response back to the web browser. 
+Web Browsers, an application (client), issue HTTP requests and process the HTTP response. Content being requested is located on a remote computer called a server. Servers are machines/devices capable of handling inbound requests, and their job is to issue a response back. Often, the response they send back contains relevant data specified in the request.
 
-Web Browsers, an application (client) issue HTTP requests and process the HTTP response in a user-friendly manner onto our screens. Content being requested is located on a remote computer called a server. Servers are machines/devices capable of handling inbound requests, and their job is to issue a response back. Often, the response they send back contains relevant data specified in the request.
-
-Resource, a generic term for things you interact w/ on the Internet via a URL; images, videos, web pages & other files. Resources are not limited to files and web pages. Resources can also be in the form of software that lets you trade stock or play a video game. There's no limit to the number of resources available on the Internet.
+Resource, a generic term for things you interact w/ on the Internet via a URL; images, videos, web pages & other files. Resources aren't limited to files and web pages, they can also be in the form of software that lets you trade stock or play a video game.
 
 A protocol is said to be **stateless** when it's designed in such a way that each request/response pair is completely independent of the previous one and those that come after.
-HTTP is a stateless protocol, which makes it flexible, but also difficult for building stateful applications
-- impact on server resources, the server does not need to hang on to information, or state, between requests
-- ease of use, when a request breaks en route to the server, no part of the system has to do any cleanup
 
 **Key Takeaway**
 Although an application may feel stateful, underneath the hood, the web is built on HTTP, a stateless protocol. Being stateless is what makes the web so:
@@ -73,20 +66,15 @@ Although an application may feel stateful, underneath the hood, the web is built
 - difficult to build on top of
 
 #### What is a URL?
-In order to find someone's home or to call them, we need an address or phone number and we can tell these pieces of information apart from one another based on how they're formatted.
-
-Similar concept for finding and accessing servers on the Internet. 
-A URL is like an address or phone number, it's the information we need in order to find someone's home or call them.
-
 A URL (Uniform Resource Locator) is a subset of URI and, like an address, it's used to navigate the web to locate resources.
 
-A URL is the most frequently used part of the general concept of a Uniform Resource Identifier or URI, which specifies how resources are located.
+It's the most frequently used part of the general concept of a Uniform Resource Identifier or URI, which specifies how resources are located.
 
 URL COMPONENTS
 The URL, "http://www.example.com:88/home?item=book", can be broken into 5 parts:
 
 1. **http**: The scheme. 
-- It always comes before the : and // and tells the web client how to access the resource. Here, it tells the web client to use the Hypertext Transfer Protocol or HTTP to make a request. 
+- It always comes before the `:` and `//` and tells the web client how to access the resource. Here, it tells the web client to use the Hypertext Transfer Protocol or HTTP to make a request. 
 - Other popular URL schemes are ftp, mailto or git. 
 - This part of the URL is sometimes referred to as the protocol, and there is a connection between the two in that the scheme can indicate which protocol (or system of rules) should be used to access the resource; in the context of of a URL however, the correct term for this component is the scheme.
 
@@ -348,16 +336,6 @@ What Server-side and client-side frameworks have in common is that the way the p
 
 
 ## Summary
-* The *Domain Name System* (DNS) is a distributed database which *translates a domain name* such as google.com *to an IP Address* such as 216.58.213.14.
-
-* A *URI* is an *identifier* for a *particular* resource within an information space.
-
-* A URL is a subset of URI, but the two terms are often used interchangeably.
-
-* URL components include the *scheme*, *host* (or hostname), *port*, *path*, and *query string*.
-
-* *Query strings* are used to *pass additional data* to the server during an HTTP Request. They take the form of *name/value pairs* separated by an = sign. Multiple name/value pairs are separated by an & sign. The start of the query string is indicated by a ?.
-
 * *URL encoding* is a technique whereby *certain characters* in a URL are *replaced with an ASCII code*.
 
 * URL encoding is used if a character has no corresponding character in the ASCII set, is unsafe because it is used for encoding other characters, or is reserved for special use within the url.
@@ -368,10 +346,8 @@ What Server-side and client-side frameworks have in common is that the way the p
 ** *request line* is made up of the HTTP Method, path and HTTP version
 ** *headers* were optional but a/o version 1.1 the host header is required
 
-* An *HTTP Response* consists of a *status line*, optional *headers*, and an optional *body*.
-
-* HTTP is a *stateless* protocol. This means that each Request/ Response cycle is independent of Request and Responses that came before or those that come after.
-
-* *Statefulness can be simulated* through techniques which use *session IDs*, *cookies*, and *AJAX*.
-
 * HTTP is *inherently insecure*. Security can be increased by using *HTTPS*, enforcing *Same-origin policy*, and using techniques to prevent *Session Hijacking* and *Cross-site Scripting*.
+
+## Quiz
+In what ways can we pass information to the application server via the URL?
+Via the path and parameters

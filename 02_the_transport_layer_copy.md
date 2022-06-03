@@ -1,10 +1,8 @@
 # The Transport Layer
 ### Communication between processes
-Concept of the internet as a *layered system* of communication where each layer provides a level of functionality or service to the layer above.
-
-Re: network communication, what's happening at the Transport layer?
+Re network communication, what's happening at the Transport layer?
 1. End-to-end communication between networked applications occurs
-  - between an application running on one host and an application running on another host
+  - between an application running on one host and an application running on another host or
   - between 2 different applications or processes running on the same host
 2. The level of network reliability is established at this layer
 
@@ -12,28 +10,26 @@ Re: network communication, what's happening at the Transport layer?
 TCP or UDP
 
 ### Multiplexing and Demultiplexing
-**Channels**, distinct lines of communication on a host machine for different applications and/or processes allowing them to send/receive data simultaneously.
+**Channels**, distinct lines of communication on a host machine for different applications and/or processes allowing them to send/receive data simultaneously. w/ IP addresses there's only one channel btwn hosts.
 
-Although we have multiple communication channels on a host, w/ IP addresses there's only one channel btwn hosts. A way to transmit multiple data inputs over a single host-to-host channel and then somehow separate them out at the other end is needed.
-
-**multiplexing**, breaking down & transmitting multiple signals over a single channel
-**demultiplexing**, the putting together of multiple transmitted signals
+**multiplexing**, breaks down & transmits multiple signals over a single channel
+**demultiplexing**, puts together the multiple transmitted signals
 
 Multiplexing and demultiplexing occurs thru the use of **network ports**
 
 ### Ports
-An identifier for a specific process running on a host. This identifier is an integer in the range 0-65535.
-Sections of the range are reserved for specific purposes. 
+An identifier for a specific process running on a host. The ID is an integer in the range 0-65535. 
+Sections of the range are reserved for specific purposes, for example if connecting via HTTP to a web-server running on a host machine, that web-server process will likely have port 80 assigned to it.
 
-'Services running on servers'? may have a port in the well-known range assigned to them. If connecting via HTTP to a web-server running on a host machine, that web-server process will likely have port 80 assigned to it.
+A service running on a client machine, e.g., a browser running on your laptop, won't use a well-known ports, but instead have a temporary port assigned to it by the operating system.
 
-A service running on a client machine, e.g., a browser running on your laptop, won't use one of these well-known ports, but instead have an *ephemeral* or temporary port assigned to it by the operating system, for example 59258.
+Source and destination port #s are included in the PDU for the transport layer.
 
-Source and destination port #s are included in the PDU for the transport layer. The name, and exact structure, of these PDUs varies by protocol, but they both include these two pieces of info
+Data from the application layer is encapsulated as the data payload in the PDU for the transport layer, and the *source and destination port numbers within this PDU is used to direct that data to specific processes on a host*. 
 
-Data from the application layer is encapsulated as the data payload in this PDU, and the *source and destination port numbers within the PDU can be used to direct that data to specific processes on a host*. 
+The entire PDU gets encapsulated as the data payload in an IP packet where the IP addresses in the packet header direct data from one host to another. 
 
-The entire PDU is then encapsulated as the data payload in an IP packet. *The IP addresses in the packet header can be used to direct data from one host to another*. The IP address and the port number *together* are what enables **end-to-end communication** btwn specific applications on different machines. The combination of IP address and port # info can be thought of as defining a **communication end-point** or more commonly, a **socket**. 
+The combination of IP address and port # info can be thought of as defining a **communication end-point** or more commonly, a **socket**. 
 
 For now, think of sockets as the combination of IP address and port number, for example 216.3.128.12:8080.
 
